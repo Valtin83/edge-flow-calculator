@@ -1,4 +1,3 @@
-import java.text.DecimalFormat;
 import java.util.Scanner;
 
 class Product {
@@ -47,8 +46,7 @@ class Product {
     public double calculateTotalLength() {
         double total = 0;
         double[] lengths = getSideLengths();
-        for (int i = 0, lengthsLength = lengths.length; i < lengthsLength; i++) {
-            double length = lengths[i];
+        for (double length : lengths) {
             total += length + getWaste(); // добавляем длину стороны и отходы
         }
         return total / 1000;
@@ -59,8 +57,7 @@ class Product {
 
         System.out.println("Длины сторон:");
         double[] lengths = getSideLengths();
-        for (int i = 0; i < lengths.length; i++) {
-            double length = lengths[i];
+        for (double length : lengths) {
             System.out.println(length + " мм");
         }
         System.out.println("Общая длина (с учетом отходов): " + calculateTotalLength() + " м.");
@@ -72,9 +69,7 @@ class Product {
         System.out.print("Количество изделий: ");
         int numberProducts = scanner.nextInt();
         double totalEdge = numberProducts * calculateTotalLength();
-
-        // Форматирование числа до 2 знаков после запятой
-        DecimalFormat df = new DecimalFormat("#.00");
-        System.out.println("Общий метраж: " + df.format(totalEdge) + " п.м.");
+        // Форматируем вывод до 2 знаков после запятой
+        System.out.printf("Общий метраж: %.2f п.м.%n", totalEdge);
     }
 }

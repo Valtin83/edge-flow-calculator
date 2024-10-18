@@ -24,8 +24,6 @@ public class Main {
         // Отображаем информацию
         product.displayInfo();
 
-        // Добавляем колличество изделий и общий метраж
         product.totalEdgeLength();
     }
-
 }
