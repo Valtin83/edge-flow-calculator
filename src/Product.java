@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 class Product {
@@ -45,7 +46,9 @@ class Product {
     // Метод для расчета общей длины с переводом в метры
     public double calculateTotalLength() {
         double total = 0;
-        for (double length : getSideLengths()) {
+        double[] lengths = getSideLengths();
+        for (int i = 0, lengthsLength = lengths.length; i < lengthsLength; i++) {
+            double length = lengths[i];
             total += length + getWaste(); // добавляем длину стороны и отходы
         }
         return total / 1000;
@@ -53,9 +56,11 @@ class Product {
 
     // Метод для отображения информации о продукте
     public void displayInfo() {
-        System.out.println("Название изделия: " + getName());
+
         System.out.println("Длины сторон:");
-        for (double length : getSideLengths()) {
+        double[] lengths = getSideLengths();
+        for (int i = 0; i < lengths.length; i++) {
+            double length = lengths[i];
             System.out.println(length + " мм");
         }
         System.out.println("Общая длина (с учетом отходов): " + calculateTotalLength() + " м.");
@@ -64,9 +69,12 @@ class Product {
     // Метод расчёта общего расхода на все изделия
     public void totalEdgeLength() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Колличество изделий: ");
+        System.out.print("Количество изделий: ");
         int numberProducts = scanner.nextInt();
-        System.out.println("Общий метраж: " + numberProducts * calculateTotalLength() + " п.м.");
+        double totalEdge = numberProducts * calculateTotalLength();
+
+        // Форматирование числа до 2 знаков после запятой
+        DecimalFormat df = new DecimalFormat("#.00");
+        System.out.println("Общий метраж: " + df.format(totalEdge) + " п.м.");
     }
 }
-
